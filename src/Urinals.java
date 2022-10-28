@@ -6,30 +6,21 @@ import java.nio.file.Path;
 public class Urinals
 {
      int countUrinals( String str ){
-        System.out.println("countUrinals");
          int cnt=0;
          int n = str.length();
-//         System.out.println(n);
          if(str.charAt(0)=='0' && str.charAt(1)=='0'){
              cnt++;
              StringBuffer string = new StringBuffer(str);
              string.setCharAt(0, '1');
              str = String.valueOf(string);
-//             System.out.println(str);
-             // str.charAt(0)=1;
          }
          {
              for(int i=1;i<n-1;i++){
-//                 System.out.println(str);
-//                 System.out.println(str.charAt(i-1) + str.charAt(i) + str.charAt(i+1));
                  if(str.charAt(i-1)=='0' && str.charAt(i+1)=='0'  && str.charAt(i)=='0'){
-//                    System.out.println("i="+i);
-//                    System.out.println("here");
                      cnt++;
                      StringBuffer string = new StringBuffer(str);
                      string.setCharAt(i, '1');
                      str = String.valueOf(string);
-//                     System.out.println(str);
                  }
              }
              if(str.charAt(n-1)=='0' && str.charAt(n-2)=='0'){
@@ -37,13 +28,11 @@ public class Urinals
                  StringBuffer string = new StringBuffer(str);
                  string.setCharAt(n-1, '1');
                  str = String.valueOf(string);
-//                System.out.println(str);
              }
          }
          return cnt;
     }
-     int goodString( String str ) {
-         System.out.println("Good String Check Function");
+     public int goodString( String str ) {
          int flag=0;
          int n = str.length();
          if(n>21)
@@ -58,7 +47,7 @@ public class Urinals
                     }
              }
              else{
-                 continue;
+                 return -1;
              }
          }
          if(str.charAt(n-2) == '1' && str.charAt(n-1)=='1'){
@@ -66,21 +55,26 @@ public class Urinals
          }
          return 1;
     }
-     String openFile() throws IOException {
-         Path fileName = Path.of("C:\\Users\\pdave6\\IdeaProjects\\ICA8\\urinal.dat");
-
-         // Now calling Files.readString() method to
-         // read the file
-         String str = Files.readString(fileName);
-
-         // Printing the string
-         System.out.println(str);
-         return str;
+     public String openFile(String str) throws IOException {
+         Path fileName = Path.of(str);
+         File tmpDir = new File(str);
+         boolean x = tmpDir.exists();
+         System.out.println(x);
+         if(x){
+             String ans = Files.readString(fileName);
+             System.out.println(ans);
+             return ans;
+         }
+         else{
+             return "No File Exist";
+         }
     }
 
-    public static void main(String[] args) {
-        String st = "100001";
-//        goodString(st);
-// 		System.out.println("Hello World");
+    public static void main(String[] args) throws IOException {
+         Urinals url = new Urinals();
+         String str = "C:\\Users\\pdave6\\IdeaProjects\\ICA8\\src\\urinal.dat";
+         url.openFile(str);
+         url.goodString(str);
+         url.countUrinals(str);
     }
 }
