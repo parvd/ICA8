@@ -1,11 +1,13 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UrinalsTest {
     Urinals url = new Urinals();
+
     @Test
     void getCountUrinals() {
         assertTrue((url.countUrinals("10001")) == 1);
@@ -14,30 +16,56 @@ class UrinalsTest {
         assertTrue((url.countUrinals("10000")) == 2);
         assertTrue((url.countUrinals("100010101010101")) == 1);
         assertTrue((url.countUrinals("100010")) == 1);
-        System.out.println("======= getCountUrinals() function is passed =======");
+        System.out.println("=======Parv Dave == 3rd getCountUrinals() function is passed =======");
 
     }
 
-//    @org.junit.jupiter.api.Test
-//    void goodString() {
-//        assertTrue((url.goodString("10111")) == -1);
-//        assertTrue((url.goodString("10101")) == 1);
-//        assertTrue((url.goodString("110000")) == -1);
-//        assertTrue((url.goodString("100001")) == 1);
-//        assertTrue((url.goodString("011")) == -1);
-//        assertTrue((url.goodString("abababa")) == -1);
-//        assertTrue((url.goodString("abafi020baba")) == -1);
-//        assertTrue((url.goodString("100010101010101010101010101010100000001")) == -1);
-//        System.out.println("======= goodString() function is passed =======");
-//    }
-//
-//    @org.junit.jupiter.api.Test
-//    void openFile() throws IOException {
-//        assertTrue((url.openFile("C:\\Users\\pdave6\\IdeaProjects\\ICA8\\src\\urinal.dat")) != "No File Exist");
-//        assertTrue((url.openFile("C:\\Users\\pdave6\\IdeaProjects\\ICA8\\src\\urinal2.dat")) != "No File Exist");
-//        assertTrue((url.openFile("C:\\Users\\IdeaProjects\\ICA8\\src\\urinal.dat")) == "No File Exist");
-//        System.out.println("======= openFile() function is passed =======");
+    @org.junit.jupiter.api.Test
+    void goodString() {
+        ArrayList<String> input1 = new ArrayList<String>() {
+            {
+                add("1000101");
+                add("1100");
+                add("011");
+                add("1111");
+                add("1010100001");
+                add("abc123");
+            }
+        };
+        ArrayList<Integer> out1 = url.goodString(input1);
+        ArrayList<Integer> actualOut = new ArrayList<Integer>() {
+            {
+                add(1);
+                add(-1);
+                add(-1);
+                add(-1);
+                add(1);
+                add(-1);
+            }
+        };
+        assertEquals(out1, actualOut);
+        System.out.println("=======Parv Dave == 2nt goodString() function is passed =======");
+    }
 
+    @org.junit.jupiter.api.Test
+    void openFile() throws IOException {
+        ArrayList<String> val = url.openFile("C:\\Users\\pdave6\\IdeaProjects\\ICA8\\src\\urinal.dat");
+        ArrayList<String> actualInput = new ArrayList<String>() {
+            {
+                add("1000101");
+                add("1100");
+                add("011");
+                add("1111");
+                add("1010100001");
+                add("abc123");
+            }
+        };
+        assertEquals(val, actualInput);
+        System.out.println("=======Parv Dave == 1st openFile() function is passed =======");
+    }
 
+//    void getWriteOutput(){
+//        boolean val = url.writeOutput();
 //    }
+
 }

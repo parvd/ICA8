@@ -41,6 +41,7 @@ public class Urinals {
         ArrayList<Integer> output = new ArrayList<>();
         for(int j=0;j<list.size();j++){
             String str = list.get(j);
+            int flag=0;
             int n = str.length();
             if (n > 21 && n<1) {
                 output.add(-1);
@@ -57,6 +58,7 @@ public class Urinals {
                         break;
                     }
                 } else {
+                    flag=1;
                     output.add(-1);
                     break;
                 }
@@ -65,15 +67,17 @@ public class Urinals {
                 output.add(-1);
                 continue;
             }
+            if(flag==0)
             output.add(countUrinals(str));
         }
         return output;
     }
 
-    void writeOutput(ArrayList<Integer> outputNumbers) throws IOException {
+    boolean writeOutput(ArrayList<Integer> outputNumbers) throws IOException {
         System.out.println(outputNumbers);
         File f = new File("src/rule.txt");
         int count = 1;
+        boolean flag = f.exists();
         while (f.exists()) {
             f = new File("src/rule" + count + ".txt");
             count++;
@@ -85,10 +89,11 @@ public class Urinals {
             writer.write("\n");
         }
         writer.close();
+        return flag;
     }
 
 
-    public static ArrayList<String> openFile(String fileName) throws FileNotFoundException {
+    public ArrayList<String> openFile(String fileName) throws FileNotFoundException {
         FileReader file = new FileReader(fileName);
         ArrayList<String> list = new ArrayList<>();
         Scanner line = new Scanner(file);
@@ -101,9 +106,9 @@ public class Urinals {
         Urinals url = new Urinals();
         String str = "C:\\Users\\pdave6\\IdeaProjects\\ICA8\\src\\urinal.dat";
         ArrayList<String> ext = url.openFile(str);
-        ArrayList <Integer> outputNumbers  = url.goodString(ext);
+        ArrayList <Integer> output  = url.goodString(ext);
 //        System.out.println(outputNumbers);
-        url.writeOutput(outputNumbers);
+        url.writeOutput(output);
         }
     }
 
